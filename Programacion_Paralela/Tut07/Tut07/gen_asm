@@ -1,0 +1,12 @@
+#!/bin/sh
+#
+#
+clear
+echo "Compiling stream_triad.c using `gcc --version | grep gcc` on"
+echo "`hostnamectl`"
+for i in 0 1 2 3
+do
+  printf "\nOptimisation level = $i:\n"
+  gcc stream_triad.c -S -Wall -fstrict-aliasing -ftree-vectorize -march=native -mtune=native -fopt-info-vec-optimized -std=gnu99 -O$i stream_triad.c
+  mv stream_triad.s stream_triad-$i.s
+done

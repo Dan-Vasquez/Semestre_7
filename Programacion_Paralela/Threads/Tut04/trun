@@ -1,0 +1,14 @@
+#!/bin/sh
+#
+# Executes an OpenMP executable image using the logical cores reported by the _NPROCESSORS_ONLN environment variable
+#
+clear
+if [ $# -eq 1 ]
+  then
+    echo -e "Will run $1 using `getconf _NPROCESSORS_ONLN` CPUs (logical cores) on host `hostname`:\n`lscpu | egrep 'Model name|Socket|Thread|NUMA|cache'` \n"
+    echo -e "$1 output:\n"
+    ./$1
+    echo -e ""
+  else
+    echo "Syntax: $0 requires one argument (the name of an OpenMP executable image)"
+fi
